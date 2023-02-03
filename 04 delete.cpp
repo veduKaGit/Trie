@@ -1,4 +1,4 @@
-// basically delete a word from the trie
+// basically delete/remove a word from the trie
 
 // there can be 3 cases (to understand, open {02 more_intro.md} wala file)
 //   1. delete zoo (delete whole word)
@@ -68,6 +68,8 @@ bool search(struct TrieNode *root, string key)   //better use string & key
 
 	return (pCrawl != NULL && pCrawl->isEndOfWord); //IMP => 2 conditions
 } 
+
+
 
 
 
