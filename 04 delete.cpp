@@ -81,7 +81,7 @@ bool isEmpty(TrieNode* root)  //returns true if ALL children are NULL
 
 
 
-TrieNode* remove(TrieNode* root, string &key, int i)   // i is the current index of key we are on
+TrieNode* remove(TrieNode* root, string key, int i)   // i is the current index of key we are on
 { 
     if (root==NULL)     //base-case 1
         return NULL; 
@@ -103,7 +103,7 @@ TrieNode* remove(TrieNode* root, string &key, int i)   // i is the current index
     
     int index = key[i] - 'a'; 
 	
-    root->children[index] = remove(root->children[index], key, i + 1);  //recursive => root and i change
+    root->children[index] = remove(root->children[index], key, i + 1);  //recursive => (root) and (i) change
   
     
     if (isEmpty(root) && root->isEndOfWord == false) {   //if node has (no children) AND (is NOT the end of another word), delete that particular node
