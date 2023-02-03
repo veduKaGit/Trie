@@ -10,6 +10,8 @@
 
 
 
+
+ 
 #include <bits/stdc++.h> 
 using namespace std; 
 
@@ -18,92 +20,93 @@ const int ALPHABET_SIZE = 26;
  
 struct TrieNode 
 { 
-	struct TrieNode *children[ALPHABET_SIZE]; 
-
-	
+	TrieNode *children[ALPHABET_SIZE]; 
 	bool isEndOfWord; 
+	
+	TrieNode(){
+	    isEndOfWord = false;
+	    for(int i=0; i<ALPHABET_SIZE; i++)
+	        children[i] = NULL;
+	}
 }; 
 
 
-struct TrieNode *getNode(void) 
-{ 
-	struct TrieNode *pNode = new TrieNode; 
 
-	pNode->isEndOfWord = false; 
-
-	for (int i = 0; i < ALPHABET_SIZE; i++) 
-		pNode->children[i] = NULL; 
-
-	return pNode; 
-} 
-
-
-void insert(struct TrieNode *root, string key) 
+void insert(struct TrieNode *root, string key) //better use string & key
 { 
 	struct TrieNode *pCrawl = root; 
 
 	for (int i = 0; i < key.length(); i++) 
 	{ 
-		int index = key[i] - 'a'; 
-		if (!pCrawl->children[index]) 
-			pCrawl->children[index] = getNode(); 
+		int index = key[i] - 'a'; 	 //a->0, b->1, c->2...so on...for the children array ka indexing
+		
+		if (pCrawl->children[index] == NULL) 
+			pCrawl->children[index] = new TrieNode(); 
 
 		pCrawl = pCrawl->children[index]; 
 	} 
 
 	 
-	pCrawl->isEndOfWord = true; 
+	pCrawl->isEndOfWord = true;  //last waale node ka (isEndOfWord = true) kar do
 } 
 
 
-bool search(struct TrieNode *root, string key) 
+
+bool search(struct TrieNode *root, string key)   //better use string & key
 { 
 	struct TrieNode *pCrawl = root; 
 
 	for (int i = 0; i < key.length(); i++) 
 	{ 
-		int index = key[i] - 'a'; 
+		int index = key[i] - 'a';   	//a->0, b->1, c->2...so on...for the children array ka indexing
+		
 		if (!pCrawl->children[index]) 
 			return false; 
 
 		pCrawl = pCrawl->children[index]; 
 	} 
 
-	return (pCrawl != NULL && pCrawl->isEndOfWord); 
+	return (pCrawl != NULL && pCrawl->isEndOfWord); //IMP => 2 conditions
 } 
 
-bool isEmpty(TrieNode* root) 
+
+
+bool isEmpty(TrieNode* root)  //returns true if ALL children are NULL
 { 
     for (int i = 0; i < ALPHABET_SIZE; i++) 
         if (root->children[i]) 
             return false; 
     return true; 
-    
 } 
 
-TrieNode* remove(TrieNode* root, string& key, int i) // i is index we are considering in key
+
+
+TrieNode* remove(TrieNode* root, string &key, int i)   // i is the current index of key we are on
 { 
-    if (root == NULL) 
+    if (root==NULL)     //base-case 1
         return NULL; 
   
-    if (i == key.size()) { 
-        if (root->isEndOfWord == true) 
+    
+    if (i == key.size()) {   //base-case 2
+        
+        if (root->isEndOfWord == true)   //make isEndOfWord for that node = false
             root->isEndOfWord = false; 
-       
-        if (isEmpty(root)){ 
+  
+        if (isEmpty(root)) {    //if node has no children, delete that particular node
             delete (root); 
             root = NULL; 
         } 
-      
+  
         return root;
     } 
   
     
     int index = key[i] - 'a'; 
+	
+    root->children[index] = remove(root->children[index], key, i + 1);  //recursive => root and i change
+  
     
-    root->children[index] = remove(root->children[index], key, i + 1); 
-    
-    if (isEmpty(root) && root->isEndOfWord == false) { 
+    if (isEmpty(root) && root->isEndOfWord == false) {   //if node has (no children) AND (is NOT the end of another word), delete that particular node
         delete (root); 
         root = NULL; 
     } 
@@ -115,12 +118,11 @@ TrieNode* remove(TrieNode* root, string& key, int i) // i is index we are consid
  
 int main()
 { 
-	
 	string keys[] = {"an", "and", "ant", "bad", "bat", "zoo"};  
 	
 	int n = sizeof(keys)/sizeof(keys[0]); 
 
-	struct TrieNode *root = getNode(); 
+	struct TrieNode *root = new TrieNode(); 
 
 	
 	for (int i = 0; i < n; i++) 
@@ -128,8 +130,7 @@ int main()
 
 	root = remove(root, "zoo", 0); 
 	
-	search(root, "zoo")? cout << "zoo --- " << "Yes\n" : 
-						cout << "zoo --- " << "No\n"; 
+	search(root, "zoo")? cout << "zoo --- " << "Yes\n" : cout << "zoo --- " << "No\n"; 
 	 
 	return 0; 
 } 
