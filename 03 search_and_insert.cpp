@@ -1,12 +1,13 @@
- 
-#include <bits/stdc++.h> 
-using namespace std; 
+// Time Complexity:
+// Search : Theta(n)
+// Insert : O(n)
+
+
+
 
 const int ALPHABET_SIZE = 26; //considering only lowercase english letters
 
-
 //an empty trie is represented as => a (root node) where (all 26 children are NULL) AND (isEndOfWord == false)
-
 
 struct TrieNode 
 { 
@@ -77,14 +78,11 @@ int main()
 
 	struct TrieNode *root = getNode(); 
 
-	
 	for (int i = 0; i < n; i++) 
 		insert(root, keys[i]); 
-
 	
-	search(root, "bat")? cout << "Yes\n" : 
-						cout << "No\n"; 
-	search(root, "gee")? cout << "Yes\n" : 
-						cout << "No\n"; 
+	search(root, "bat")? cout << "Yes\n" : cout << "No\n"; 
+	search(root, "gee")? cout << "Yes\n" : cout << "No\n"; 
+	
 	return 0; 
 } 
