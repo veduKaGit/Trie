@@ -31,7 +31,7 @@ vector<vector<int>> uniqueRow(int m[MAX][MAX],int row,int col)
     Node *curr;
 	
     for(int i=0; i<row; i++){
-        curr = root;
+        curr = root;    //for every ith row, start curr from root
         vector<int> tem;
 	    
         for(int j=0; j<col; j++){
