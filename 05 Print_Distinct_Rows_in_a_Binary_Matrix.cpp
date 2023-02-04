@@ -35,14 +35,15 @@ vector<vector<int>> uniqueRow(int m[MAX][MAX],int row,int col)
         vector<int> tem;
 	    
         for(int j=0; j<col; j++){
-            tem.push_back(m[i][j]);
+            tem.push_back(m[i][j]);  //tem array is basically the ith row
 		
             if(curr->ch[m[i][j]]==NULL)
                 curr->ch[m[i][j]] = new Node();
                 
             curr = curr->ch[m[i][j]];
         }
-        if(curr->end == false){
+	    
+        if(curr->end == false){  //if curr->end was NOT a row encountered before, then push tem into res
             res.push_back(tem);
             curr->end = true;
         }
