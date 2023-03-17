@@ -48,7 +48,7 @@ bool search(struct TrieNode *root, string key)   //better use string & key
 	{ 
 		int index = key[i] - 'a';   	//a->0, b->1, c->2...so on...for the children array ka indexing
 		
-		if (!pCrawl->children[index]) 
+		if (pCrawl->children[index] == NULL) 
 			return false; 
 
 		pCrawl = pCrawl->children[index]; 
