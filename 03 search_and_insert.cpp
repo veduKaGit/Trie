@@ -10,7 +10,7 @@ const int ALPHABET_SIZE = 26; //considering only lowercase english letters
 
 struct TrieNode 
 { 
-	TrieNode *children[ALPHABET_SIZE]; 
+	TrieNode *children[ALPHABET_SIZE];  //array of TrieNodes
 	bool isEndOfWord;  //indicates if this node is end of a word or not
 	
 	TrieNode(){
