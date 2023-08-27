@@ -1,3 +1,14 @@
+//LEETCODE QUES
+
+// Given an integer array nums
+// return the maximum result of nums[i] XOR nums[j], where 0 <= i <= j < n.
+
+// Constraints:
+// 1 <= nums.length <= 2 * 10^5
+// 0 <= nums[i] <= 2^31 - 1
+
+
+
 //struct mei use small 's'
 struct TrieNode{    //do NOT write struct TrieNode() -> ie. NO bracket
     TrieNode* child[2];
@@ -41,7 +52,7 @@ public:
         return ret;
     }
 
-    int findMaximumXOR(vector<int>& nums) {
+    int findMaximumXOR(vector<int>& nums) {  //main func
         TrieNode*root = new TrieNode();
         
         for(int i=0; i<nums.size(); i++)    //insert all nodes
