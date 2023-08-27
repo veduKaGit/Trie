@@ -64,7 +64,7 @@ int main()
 	
 	int n = sizeof(keys)/sizeof(keys[0]); 
 
-	struct TrieNode *root = new TrieNode(); 
+	struct TrieNode *root = new TrieNode();   //to create ROOT to trie
 
 	for (int i = 0; i < n; i++) 
 		insert(root, keys[i]); 
