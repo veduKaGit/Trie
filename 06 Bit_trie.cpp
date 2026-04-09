@@ -7,6 +7,11 @@
 // 1 <= nums.length <= 2 * 10^5
 // 0 <= nums[i] <= 2^31 - 1
 
+// Input: nums = [3,10,5,25,2,8]
+// Output: 28
+// Explanation: The maximum result is 5 XOR 25 = 28.
+
+
 
 // GENERAL NOTE-> 
 whenever we see PAIRS AND XOR together in a ques => Trie may be used
